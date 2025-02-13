@@ -1,0 +1,12 @@
+services:
+  introducaotestes:
+    stdin_open: true
+    tty: true
+    command: bash
+    build:
+      context: .
+    container_name: introducao-testes
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./aulaTestes/:/home/introducaotestes			
