@@ -2,22 +2,25 @@ package com.aula.aulaTestes.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Method;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@SpringBootTest
 public class ExemploServiceTest {
     
     private ExemploService exemploService;
@@ -55,6 +58,7 @@ public class ExemploServiceTest {
     @Test
     @DisplayName("Testar verificar se objeto e null")
     @Order(1)
+    @EnabledOnOs({OS.MAC, OS.WINDOWS})
     void testeVerificarSeObjetoNulo(){
         System.out.println("Metodo: testeVerificarSeObjetoNulo");
 
@@ -76,7 +80,9 @@ public class ExemploServiceTest {
     }
 
     @Test
+    @DisplayName("Testar verificar timeout")
     @Order(0)
+    @Disabled("Pulando o de timeout")
     void testeVerificarTimeout(){
         System.out.println("Metodo: testeVerificarTimeout");
         assertTimeoutPreemptively(
